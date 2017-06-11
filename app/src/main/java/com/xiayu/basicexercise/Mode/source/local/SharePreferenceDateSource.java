@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSON;
 import com.xiayu.basicexercise.Mode.TasksDataSource;
 import com.xiayu.basicexercise.Mode.WishesData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,9 +24,9 @@ public class SharePreferenceDateSource implements TasksDataSource<WishesData> {
     }
 
     public static SharePreferenceDateSource getSinglton(Context context){
-        if(sharePreferncesDataSouce != null ){
+        if(sharePreferncesDataSouce == null ){
             synchronized (SharePreferenceDateSource.class){
-                if(sharePreferncesDataSouce != null){
+                if(sharePreferncesDataSouce == null){
                     sharePreferncesDataSouce = new SharePreferenceDateSource(context);
                 }
             }
@@ -50,6 +51,9 @@ public class SharePreferenceDateSource implements TasksDataSource<WishesData> {
     public void saveTask(@NonNull WishesData task, @NonNull SaveCallback callback) {
         String data = sharedPreferences.getString("wishes","");
         List<WishesData> wishesdata = JSON.parseArray(data, WishesData.class);
+        if(wishesdata == null){
+            wishesdata = new ArrayList<>();
+        }
         wishesdata.add(task);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("wishes",JSON.toJSONString(wishesdata));
