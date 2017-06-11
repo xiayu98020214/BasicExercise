@@ -18,7 +18,7 @@ public class WishPresent implements WishContract.Present{
     WishContract.View wishesView;
 
     public WishPresent(TasksDataSource<WishesData> source, WishContract.View view){
-       // wishSource = checkNotNull(source);
+        wishSource = checkNotNull(source);
         wishesView = checkNotNull(view);
         wishesView.setPresenter(this);
     }
@@ -36,7 +36,18 @@ public class WishPresent implements WishContract.Present{
         data.setContent("你最棒");
         List<WishesData> list = new ArrayList<>();
         list.add(data);
-        wishesView.showWishes(list);
+        wishSource.getTasks(new TasksDataSource.LoadTasksCallback<List<WishesData>>() {
+            @Override
+            public void onTasksLoaded(List<WishesData> tasks) {
+                wishesView.showWishes(tasks);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
+
     }
 
 }

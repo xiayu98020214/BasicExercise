@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.xiayu.basicexercise.ActivityUtil;
+import com.xiayu.basicexercise.Mode.source.local.SharePreferenceDateSource;
 import com.xiayu.basicexercise.R;
 
 public class WishActivity extends AppCompatActivity
@@ -50,7 +51,7 @@ public class WishActivity extends AppCompatActivity
             wishFragment = WishFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(),wishFragment,R.id.contentFrame);
         }
-        new WishPresent(null, wishFragment);
+        new WishPresent(SharePreferenceDateSource.getSinglton(this), wishFragment);
 
 
 
