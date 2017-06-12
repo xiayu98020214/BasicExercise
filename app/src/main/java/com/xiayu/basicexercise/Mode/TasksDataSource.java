@@ -18,6 +18,8 @@ package com.xiayu.basicexercise.Mode;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 /**
  * Main entry point for accessing tasks data.
  * <p>
@@ -45,5 +47,6 @@ public interface TasksDataSource<T> {
     void getTasks(@NonNull LoadTasksCallback callback);
     void getTask(@NonNull String taskId, @NonNull LoadTasksCallback callback);
     void saveTask(@NonNull T task, @NonNull SaveCallback callback);
+    void saveTasks(@NonNull List<T> task, @NonNull SaveCallback callback);
 
 }

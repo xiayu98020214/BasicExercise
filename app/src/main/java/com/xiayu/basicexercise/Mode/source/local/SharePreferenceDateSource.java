@@ -39,7 +39,9 @@ public class SharePreferenceDateSource implements TasksDataSource<WishesData> {
     public void getTasks(@NonNull LoadTasksCallback callback) {
         String data = sharedPreferences.getString("wishes","");
         List<WishesData> wishesdata = JSON.parseArray(data, WishesData.class);
+
         callback.onTasksLoaded(wishesdata);
+
     }
 
     @Override
@@ -55,6 +57,24 @@ public class SharePreferenceDateSource implements TasksDataSource<WishesData> {
             wishesdata = new ArrayList<>();
         }
         wishesdata.add(task);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("wishes",JSON.toJSONString(wishesdata));
+        boolean flag = editor.commit();
+        if(flag){
+            callback.onSuccess();
+        }else{
+            callback.onFai("error");
+        }
+    }
+
+    @Override
+    public void saveTasks(@NonNull List<WishesData> tasks, @NonNull SaveCallback callback) {
+        String data = sharedPreferences.getString("wishes","");
+        List<WishesData> wishesdata = JSON.parseArray(data, WishesData.class);
+        if(wishesdata == null){
+            wishesdata = new ArrayList<>();
+        }
+        wishesdata.addAll(tasks);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("wishes",JSON.toJSONString(wishesdata));
         boolean flag = editor.commit();

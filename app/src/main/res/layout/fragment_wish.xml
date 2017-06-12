@@ -10,17 +10,35 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/wish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <EditText
-            android:id="@+id/addwish"
-            android:layout_width="match_parent"
-            android:layout_height="16dp"
+            android:id="@+id/wish1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="第一个愿望"/>
+        <EditText
+            android:id="@+id/wish2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="第二个愿望"/>
+        <EditText
+            android:id="@+id/wish3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="第三个愿望"/>
 
-            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/wishlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <Button
+            android:id="@+id/addwish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加一个梦想"/>
     </LinearLayout>
 
 </FrameLayout>

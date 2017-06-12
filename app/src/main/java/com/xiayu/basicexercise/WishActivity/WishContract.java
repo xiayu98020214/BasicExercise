@@ -14,6 +14,8 @@ public class WishContract {
 
     interface View extends BaseView<Present>{
         void showWishes(List<WishesData> data);
+        void showSaveSuc();
+        void showNoWish();
 
     }
 
