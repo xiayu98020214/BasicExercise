@@ -41,18 +41,14 @@ public class WishPresent implements WishContract.Present {
 
     @Override
     public void start() {
-        WishesData data = new WishesData();
-        data.setContent("你最棒");
-        List<WishesData> list = new ArrayList<>();
-        list.add(data);
         wishSource.getTasks(new TasksDataSource.LoadTasksCallback<List<WishesData>>() {
             @Override
             public void onTasksLoaded(List<WishesData> tasks) {
-                if (tasks == null || tasks.size() == 0) {
-                    wishesView.showNoWish();
-                } else {
-                    wishesView.showWishes(tasks);
+                if (tasks == null) {
+                    tasks = new ArrayList<WishesData>();
                 }
+                wishesView.showWishes(tasks);
+
             }
 
             @Override

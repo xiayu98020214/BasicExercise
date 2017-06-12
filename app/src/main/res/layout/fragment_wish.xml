@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
+ <!--       <EditText
             android:id="@+id/wish1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:id="@+id/wish3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="第三个愿望"/>
+            android:hint="第三个愿望"/>-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/wishlist"
@@ -38,7 +38,7 @@
             android:id="@+id/addwish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="加一个梦想"/>
+            android:text="保存梦想"/>
     </LinearLayout>
 
 </FrameLayout>

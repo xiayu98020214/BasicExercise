@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.xiayu.basicexercise.Mode.WishesData;
 import com.xiayu.basicexercise.R;
@@ -93,9 +92,9 @@ public class WishFragment extends Fragment implements WishContract.View {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_wish, container, false);
-        wishTvs.add((EditText) view.findViewById(R.id.wish1));
+ /*       wishTvs.add((EditText) view.findViewById(R.id.wish1));
         wishTvs.add((EditText) view.findViewById(R.id.wish2));
-        wishTvs.add((EditText) view.findViewById(R.id.wish3));
+        wishTvs.add((EditText) view.findViewById(R.id.wish3));*/
 
         initRv(view);
 
@@ -104,10 +103,15 @@ public class WishFragment extends Fragment implements WishContract.View {
         addWishBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<WishesData> datas = new ArrayList<WishesData>();
-                WishesData data = new WishesData();
-                data.setContent(addWishEt.getText().toString());
-                mPresent.saveWishes(datas);
+                for (int i = 0; i < 5; i++) {
+
+                    View view = wishListRv.getChildAt(i);
+                    if (null != wishListRv.getChildViewHolder(view)) {
+                        WishAadapter.MyViewHolder viewHolder = (WishAadapter.MyViewHolder) wishListRv.getChildViewHolder(view);
+                        wishDatas.get(i).setContent(viewHolder.content.getText().toString());
+                    }
+                }
+                mPresent.saveWishes(wishDatas);
             }
         });
         return view;
@@ -146,16 +150,23 @@ public class WishFragment extends Fragment implements WishContract.View {
     @Override
     public void showWishes(@NonNull List<WishesData> data) {
         checkNotNull(data);
-        for (int i = 0; i < data.size(); i++) {
+/*        for (int i = 0; i < data.size(); i++) {
             wishTvs.get(i).setText(data.get(i).getContent());
+        }*/
+        wishDatas.clear();
+        wishDatas.addAll(data);
+        for (int i = wishDatas.size(); i < 5; i++) {
+            WishesData defaultdata = new WishesData();
+            defaultdata.setContent("请您输入第" + (i + 1) + "梦想");
+            wishDatas.add(defaultdata);
         }
-       // wishDatas = data;
-       // mAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
+
 
     }
 
-    private void initwishDatas(){
-        WishesData data = new WishesData();
+    private void initwishDatas() {
+/*        WishesData data = new WishesData();
         data.setContent("第一");
         wishDatas.add(data);
         data = new WishesData();
@@ -164,16 +175,16 @@ public class WishFragment extends Fragment implements WishContract.View {
         data = new WishesData();
         data.setContent("第三");
         wishDatas.add(data);
-        mAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();*/
     }
 
-    private void initRv(View view){
+    private void initRv(View view) {
         wishListRv = (RecyclerView) view.findViewById(R.id.wishlist);
         wishListRv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new WishAadapter(getActivity(),wishDatas);
+        mAdapter = new WishAadapter(getActivity(), wishDatas);
         wishListRv.setAdapter(mAdapter);
         initwishDatas();
-        mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback(){
+        mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
 
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
@@ -218,15 +229,18 @@ public class WishFragment extends Fragment implements WishContract.View {
                 if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
                     viewHolder.itemView.setBackgroundColor(Color.LTGRAY);
                 }
-                super.onSelectedChanged(viewHolder, actionState);            }
+                super.onSelectedChanged(viewHolder, actionState);
+            }
 
             @Override
             public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                 super.clearView(recyclerView, viewHolder);
-                viewHolder.itemView.setBackgroundColor(0);            }
-        } );
+                viewHolder.itemView.setBackgroundColor(0);
+            }
+        });
         mItemTouchHelper.attachToRecyclerView(wishListRv);
     }
+
     @Override
     public void showSaveSuc() {
         Snackbar.make(getView(), "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -281,8 +295,8 @@ public class WishFragment extends Fragment implements WishContract.View {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-              WishesData data = wishData.get(position);
-              holder.content.setText(data.getContent());
+            WishesData data = wishData.get(position);
+            holder.content.setText(data.getContent());
         }
 
         @Override
@@ -290,12 +304,13 @@ public class WishFragment extends Fragment implements WishContract.View {
             return wishData.size();
         }
 
+
         public static class MyViewHolder extends RecyclerView.ViewHolder {
-            private TextView content;
+            private EditText content;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
-                content = (TextView) itemView.findViewById(R.id.content);
+                content = (EditText) itemView.findViewById(R.id.content);
             }
         }
     }
