@@ -16,6 +16,7 @@ public class WishContract {
         void showWishes(List<WishesData> data);
         void showSaveSuc();
         void showNoWish();
+        boolean isActive();
 
     }
 

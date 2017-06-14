@@ -35,8 +35,7 @@ public class SharePreferenceTest {
     @Test
     public void saveAndReadWish(){
         List<WishesData> datas;
-        final WishesData data = new WishesData();
-        data.setContent("你最好");
+        final WishesData data = new WishesData("你最好");
         sharePreferenceDateSource.saveTask(data, new TasksDataSource.SaveCallback() {
             @Override
             public void onSuccess() {

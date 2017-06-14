@@ -10,6 +10,10 @@ public class WishesData implements Serializable{
 
     String content;
 
+    public WishesData(String comtent){
+        this.content = content;
+    }
+
     public String getContent() {
         return content;
     }

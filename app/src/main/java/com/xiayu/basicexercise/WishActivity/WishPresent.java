@@ -44,6 +44,9 @@ public class WishPresent implements WishContract.Present {
         wishSource.getTasks(new TasksDataSource.LoadTasksCallback<List<WishesData>>() {
             @Override
             public void onTasksLoaded(List<WishesData> tasks) {
+                if(!wishesView.isActive()){
+                    return;
+                }
                 if (tasks == null) {
                     tasks = new ArrayList<WishesData>();
                 }

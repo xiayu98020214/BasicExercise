@@ -156,9 +156,7 @@ public class WishFragment extends Fragment implements WishContract.View {
         wishDatas.clear();
         wishDatas.addAll(data);
         for (int i = wishDatas.size(); i < 5; i++) {
-            WishesData defaultdata = new WishesData();
-            defaultdata.setContent("请您输入第" + (i + 1) + "梦想");
-            wishDatas.add(defaultdata);
+            wishDatas.add(new WishesData("请您输入第" + (i + 1) + "梦想"));
         }
         mAdapter.notifyDataSetChanged();
 
@@ -252,6 +250,11 @@ public class WishFragment extends Fragment implements WishContract.View {
     public void showNoWish() {
         Snackbar.make(getView(), "No wishes", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
     }
 
     @Override
