@@ -1,5 +1,7 @@
 package com.xiayu.basicexercise;
 
+import android.util.Log;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -11,6 +13,7 @@ import static org.junit.Assert.assertEquals;
  */
 
 public class stringReverseTest {
+    private static final String TAG = "stringReverseTest";
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
 
@@ -53,5 +56,40 @@ public class stringReverseTest {
         String expect = "你evol爱我";
         String out = StringUtil.stringReverse(src);
         assertEquals(expect,out);
+    }
+
+    public int x;
+    public int last()
+    {
+        x = 1;
+        try
+        {
+            return x;
+        }
+        finally
+        {
+            ++x;
+        }
+    }
+
+    public int get()
+    {
+        try
+        {
+            return  1 ;
+        }
+        finally
+        {
+            return 2 ;
+        }
+    }
+
+
+    @Test
+    public void testlast(){
+        int y = last(); //y =1  x=2
+        int z = get();// z =2;
+        Log.e(TAG,"x:"+x+"   y:"+y);
+        
     }
 }
