@@ -15,6 +15,7 @@ import com.xiayu.basicexercise.R;
 public class VDHLayout extends LinearLayout {
     private ViewDragHelper mDragHelper;
     private View firstWish;
+    private static final String TAG = "VDHLayout";
 
     public VDHLayout(Context context) {
         super(context);
@@ -40,8 +41,9 @@ public class VDHLayout extends LinearLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
 
-        if (ev.getPointerCount() > 1 || action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
+        if (ev.getPointerCount() > 1 ) {
             mDragHelper.cancel();
+            Log.e(TAG, "cancel");
             return false;
         }
         return mDragHelper.shouldInterceptTouchEvent(ev);

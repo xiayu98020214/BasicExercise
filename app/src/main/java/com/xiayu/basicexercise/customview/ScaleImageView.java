@@ -5,6 +5,7 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.view.ViewTreeObserver;
 
 public class ScaleImageView extends android.support.v7.widget.AppCompatImageView implements ViewTreeObserver.OnGlobalLayoutListener,
         View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener {
+    private static final String TAG = "ScaleImageView";
     // 是否是初次加载
     private boolean mIsFirst = false;
     // 初始化的图片缩放值
@@ -99,6 +101,7 @@ public class ScaleImageView extends android.support.v7.widget.AppCompatImageView
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        Log.e(TAG,"onTouch");
         mScaleGestureDetector.onTouchEvent(event);
         return true;//这里要return true才行
     }
