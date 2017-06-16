@@ -39,6 +39,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="保存梦想"/>
+        <com.xiayu.basicexercise.customview.VDHLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/youtubeLayout"
+            android:background="#f5ff"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            <ImageView
+                android:id="@+id/move"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/reward_gived"
+
+                />
+
+
+<!--
+            <TextView
+                android:id="@+id/move"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="#e5f"/>
+-->
+
+
+
+        </com.xiayu.basicexercise.customview.VDHLayout>
     </LinearLayout>
 
 </FrameLayout>

@@ -10,6 +10,9 @@ public class WishesData implements Serializable{
 
     String content;
 
+    public WishesData(){
+    }
+
     public WishesData(String comtent){
         this.content = content;
     }
