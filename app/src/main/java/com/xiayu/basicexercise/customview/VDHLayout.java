@@ -32,7 +32,7 @@ public class VDHLayout extends LinearLayout {
 
     @Override
     protected void onFinishInflate() {
-        firstWish = (View) this.findViewById(R.id.move);
+        firstWish = (View) this.findViewById(R.id.button);
         super.onFinishInflate();
 
     }
@@ -46,11 +46,17 @@ public class VDHLayout extends LinearLayout {
             Log.e(TAG, "cancel");
             return false;
         }
-        return mDragHelper.shouldInterceptTouchEvent(ev);
+        boolean flag = mDragHelper.shouldInterceptTouchEvent(ev);
+        Log.e(TAG,"onInterceptTouchEvent:"+flag);
+        return flag;
     }
+
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        Log.e(TAG, "onTouchEvent:"+ev.getAction());
         mDragHelper.processTouchEvent(ev);
         return true;
     }
@@ -78,6 +84,16 @@ public class VDHLayout extends LinearLayout {
              final int rightBound = getWidth() - firstWish.getWidth();
              final int newLeft = Math.min(Math.max(left, leftBound), rightBound);
              return newLeft;
+         }
+         @Override
+         public int getViewHorizontalDragRange(View child)
+         {
+             return getMeasuredWidth()-child.getMeasuredWidth();
+         }
+         @Override
+         public int getViewVerticalDragRange(View child)
+         {
+             return getMeasuredHeight()-child.getMeasuredHeight();
          }
     }
 

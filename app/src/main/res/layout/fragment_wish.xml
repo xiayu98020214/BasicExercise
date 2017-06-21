@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
  <!--       <EditText
             android:id="@+id/wish1"
@@ -38,8 +39,11 @@
             android:id="@+id/addwish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="保存梦想"/>
-        <com.xiayu.basicexercise.customview.VDHLayout
+            android:text="保存梦想"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <com.xiayu.basicexercise.customview.VDHLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/youtubeLayout"
@@ -48,18 +52,25 @@
             android:visibility="visible">
 
 
-            <ImageView
+<!--            <ImageView
                 android:id="@+id/move"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:src="@drawable/reward_gived"
 
-                />
+                />-->
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点我"/>
 
             <com.xiayu.basicexercise.customview.ScaleImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:id="@+id/notmove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:scaleType="matrix"
                 android:src="@drawable/reward_gived" />
 
@@ -73,6 +84,5 @@
 
 
         </com.xiayu.basicexercise.customview.VDHLayout>
-    </LinearLayout>
 
 </FrameLayout>
