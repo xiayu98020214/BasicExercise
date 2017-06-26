@@ -9,12 +9,16 @@ import java.io.Serializable;
 public class WishesData implements Serializable{
 
     String content;
+    public float x;
+    public float y;
 
     public WishesData(){
     }
 
-    public WishesData(String comtent){
+    public WishesData(String comtent, float x, float y){
         this.content = content;
+        this.x=x;
+        this.y=y;
     }
 
     public String getContent() {
@@ -25,10 +29,29 @@ public class WishesData implements Serializable{
         this.content = content;
     }
 
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
     @Override
     public String toString() {
         return "WishesData{" +
                 "content='" + content + '\'' +
+                ", x=" + x +
+                ", y=" + y +
                 '}';
     }
 }

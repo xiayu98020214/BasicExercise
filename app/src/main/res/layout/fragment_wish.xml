@@ -35,18 +35,25 @@
         </android.support.v7.widget.RecyclerView>
 
 
-        <Button
+<!--        <Button
             android:id="@+id/addwish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="保存梦想"
-            android:visibility="gone"/>
+            android:visibility="gone"/>-->
     </LinearLayout>
 
+    <Button
+        android:id="@+id/addwish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="保存梦想"
+        />
     <com.xiayu.basicexercise.customview.VDHLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/youtubeLayout"
+            android:id="@+id/allwishes"
             android:background="#f5ff"
             android:orientation="vertical"
             android:visibility="visible">
@@ -67,16 +74,16 @@
             android:layout_height="wrap_content"
             android:text="点我"/>
 
-            <com.xiayu.basicexercise.customview.ScaleImageView
+<!--            <com.xiayu.basicexercise.customview.ScaleImageView
                 android:id="@+id/notmove"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="matrix"
-                android:src="@drawable/reward_gived" />
+                android:src="@drawable/reward_gived" />-->
 
 
         <com.xiayu.basicexercise.customview.ScaleImageView2
-            android:id="@+id/move2"
+            android:id="@+id/firstwish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/reward_gived" />

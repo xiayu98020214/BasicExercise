@@ -20,6 +20,7 @@ import android.widget.EditText;
 
 import com.xiayu.basicexercise.Mode.WishesData;
 import com.xiayu.basicexercise.R;
+import com.xiayu.basicexercise.customview.VDHLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,12 +89,14 @@ public class WishFragment extends Fragment implements WishContract.View {
     private WishAadapter mAdapter;
     private List<WishesData> wishDatas = new ArrayList<>();
     private ItemTouchHelper mItemTouchHelper;
+    private VDHLayout mAllwishes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_wish, container, false);
+        mAllwishes = (VDHLayout)view.findViewById(R.id.allwishes);
  /*       wishTvs.add((EditText) view.findViewById(R.id.wish1));
         wishTvs.add((EditText) view.findViewById(R.id.wish2));
         wishTvs.add((EditText) view.findViewById(R.id.wish3));*/
@@ -101,27 +104,36 @@ public class WishFragment extends Fragment implements WishContract.View {
         initRv(view);
 
         //  addWishEt = (EditText)view.findViewById(R.id.newwish);
+
+
         addWishBn = (Button) view.findViewById(R.id.addwish);
         addWishBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < 5; i++) {
+
+/*                for (int i = 0; i < 5; i++) {
 
                     View view = wishListRv.getChildAt(i);
                     if (null != wishListRv.getChildViewHolder(view)) {
                         WishAadapter.MyViewHolder viewHolder = (WishAadapter.MyViewHolder) wishListRv.getChildViewHolder(view);
                         wishDatas.get(i).setContent(viewHolder.content.getText().toString());
                     }
-                }
+                }*/
+                wishDatas.clear();
+                wishDatas.addAll(mAllwishes.getAllWishes());
                 mPresent.saveWishes(wishDatas);
             }
         });
 
         Button move = (Button)view.findViewById(R.id.button);
+
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e(TAG,"move");
+                wishDatas.clear();
+                wishDatas.addAll(mAllwishes.getAllWishes());
+                mPresent.saveWishes(wishDatas);
             }
         });
         return view;
@@ -159,16 +171,20 @@ public class WishFragment extends Fragment implements WishContract.View {
 
     @Override
     public void showWishes(@NonNull List<WishesData> data) {
+
         checkNotNull(data);
+  /*      List<WishesData> temp = new ArrayList<>();
+        temp.add(new WishesData("nihao",100,100) );*/
+        mAllwishes.setAllWishes(data);
 /*        for (int i = 0; i < data.size(); i++) {
             wishTvs.get(i).setText(data.get(i).getContent());
         }*/
-        wishDatas.clear();
+/*        wishDatas.clear();
         wishDatas.addAll(data);
         for (int i = wishDatas.size(); i < 5; i++) {
             wishDatas.add(new WishesData("请您输入第" + (i + 1) + "梦想"));
         }
-        mAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();*/
 
 
     }
