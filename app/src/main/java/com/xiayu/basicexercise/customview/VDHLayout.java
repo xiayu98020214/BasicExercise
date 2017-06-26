@@ -7,6 +7,7 @@ import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -15,6 +16,9 @@ import com.xiayu.basicexercise.R;
 public class VDHLayout extends LinearLayout {
     private ViewDragHelper mDragHelper;
     private View firstWish;
+
+    private ScaleGestureDetector mScaleGestureDetector;
+
     private static final String TAG = "VDHLayout";
 
     public VDHLayout(Context context) {
@@ -24,6 +28,8 @@ public class VDHLayout extends LinearLayout {
     public VDHLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mDragHelper = ViewDragHelper.create(this, 1.0f, new DragHelperCallback());
+
+        mScaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureListener());
     }
 
     public VDHLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -58,6 +64,7 @@ public class VDHLayout extends LinearLayout {
     public boolean onTouchEvent(MotionEvent ev) {
         Log.e(TAG, "onTouchEvent:"+ev.getAction());
         mDragHelper.processTouchEvent(ev);
+        mScaleGestureDetector.onTouchEvent(ev);
         return true;
     }
 
@@ -72,7 +79,7 @@ public class VDHLayout extends LinearLayout {
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
             final int topBound = getPaddingTop();
-            final int bottomBound = getHeight() - firstWish.getHeight();
+            final int bottomBound = getHeight() - child.getMeasuredHeight();
             final int newTop = Math.min(Math.max(top, topBound), bottomBound);
             return newTop;
         }
@@ -81,7 +88,7 @@ public class VDHLayout extends LinearLayout {
          public int clampViewPositionHorizontal(View child, int left, int dx) {
              Log.d("DragLayout", "clampViewPositionHorizontal " + left + "," + dx);
              final int leftBound = getPaddingLeft();
-             final int rightBound = getWidth() - firstWish.getWidth();
+             final int rightBound = getWidth() - child.getMeasuredWidth();
              final int newLeft = Math.min(Math.max(left, leftBound), rightBound);
              return newLeft;
          }
@@ -97,5 +104,25 @@ public class VDHLayout extends LinearLayout {
          }
     }
 
+
+    public class ScaleGestureListener implements ScaleGestureDetector.OnScaleGestureListener{
+
+        @Override
+        public boolean onScale(ScaleGestureDetector detector) {
+            Log.e(TAG, "onScale");
+            return false;
+        }
+
+        @Override
+        public boolean onScaleBegin(ScaleGestureDetector detector) {
+            Log.e(TAG,"onScaleBegin");
+            return true;
+        }
+
+        @Override
+        public void onScaleEnd(ScaleGestureDetector detector) {
+
+        }
+    }
 
 }

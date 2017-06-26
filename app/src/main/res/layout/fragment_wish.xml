@@ -75,11 +75,11 @@
                 android:src="@drawable/reward_gived" />
 
 
-  <!--          <TextView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="#e5f"/>-->
+        <com.xiayu.basicexercise.customview.ScaleImageView2
+            android:id="@+id/move2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/reward_gived" />
 
 
 
