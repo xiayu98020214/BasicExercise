@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -91,6 +93,14 @@ public class WishFragment extends Fragment implements WishContract.View {
     private ItemTouchHelper mItemTouchHelper;
     private VDHLayout mAllwishes;
 
+    private Handler mHandler = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mPresent.start();
+        }
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -136,13 +146,14 @@ public class WishFragment extends Fragment implements WishContract.View {
                 mPresent.saveWishes(wishDatas);
             }
         });
+
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPresent.start();
+        mHandler.sendMessageDelayed(Message.obtain(),500);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -173,8 +184,8 @@ public class WishFragment extends Fragment implements WishContract.View {
     public void showWishes(@NonNull List<WishesData> data) {
 
         checkNotNull(data);
-  /*      List<WishesData> temp = new ArrayList<>();
-        temp.add(new WishesData("nihao",100,100) );*/
+       /* List<WishesData> temp = new ArrayList<>();
+        temp.add(new WishesData("nihao",200,200) );*/
         mAllwishes.setAllWishes(data);
 /*        for (int i = 0; i < data.size(); i++) {
             wishTvs.get(i).setText(data.get(i).getContent());

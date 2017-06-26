@@ -37,6 +37,17 @@ public class VDHLayout extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
+/*    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        int l1 = (int)mWishesData.get(0).x;
+        int t1 = (int)mWishesData.get(0).y;
+        int r1 = l + firstWish.getMeasuredWidth();
+
+        int b1 = t + firstWish.getMeasuredHeight();
+        firstWish.layout(l1,t1,r1,b1);
+    }*/
+
     public List<WishesData> getAllWishes(){
         List<WishesData> datas = new ArrayList<>();
         float x = firstWish.getX();
@@ -45,11 +56,23 @@ public class VDHLayout extends LinearLayout {
         return datas;
     }
 
+    private List<WishesData> mWishesData;
     public void setAllWishes(List<WishesData> data){
-        firstWish.setX(data.get(0).x);
-        firstWish.setY(data.get(0).y);
+        mWishesData =data;
+     /*   firstWish.setX(data.get(0).x);
+        firstWish.setY(data.get(0).y);*/
+         int l = (int)data.get(0).x;
+          int t = (int)data.get(0).y;
+        int r = l + firstWish.getMeasuredWidth();
+
+                int b = t + firstWish.getMeasuredHeight();
+       firstWish.layout(l,t,r,b);
+/*
+        mDragHelper.settleCapturedViewAt()
+*/
 
     }
+
 
     @Override
     protected void onFinishInflate() {
