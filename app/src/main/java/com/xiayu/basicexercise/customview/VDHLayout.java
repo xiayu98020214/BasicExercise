@@ -48,25 +48,34 @@ public class VDHLayout extends LinearLayout {
         firstWish.layout(l1,t1,r1,b1);
     }*/
 
-    public List<WishesData> getAllWishes(){
+    public List<WishesData> getAllWishes() {
         List<WishesData> datas = new ArrayList<>();
         float x = firstWish.getX();
         float y = firstWish.getY();
-        datas.add(new WishesData("nihao",x,y));
+        WishesData data = new WishesData("nihao", x, y);
+        data.setScaleFactor(firstWish.getScaleX());
+        datas.add(data);
         return datas;
     }
 
     private List<WishesData> mWishesData;
-    public void setAllWishes(List<WishesData> data){
-        mWishesData =data;
-     /*   firstWish.setX(data.get(0).x);
+
+    public void setAllWishes(List<WishesData> data) {
+        mWishesData = data;
+   /*     firstWish.setX(data.get(0).x);
         firstWish.setY(data.get(0).y);*/
-         int l = (int)data.get(0).x;
-          int t = (int)data.get(0).y;
+        int l = (int) data.get(0).x;
+        int t = (int) data.get(0).y;
         int r = l + firstWish.getMeasuredWidth();
 
-                int b = t + firstWish.getMeasuredHeight();
-       firstWish.layout(l,t,r,b);
+        int b = t + firstWish.getMeasuredHeight();
+        firstWish.layout(l, t, r, b);
+
+        if (data.get(0).getScaleFactor() > 0) {
+            firstWish.setScaleY(data.get(0).getScaleFactor());
+            firstWish.setScaleX(data.get(0).getScaleFactor());
+        }
+
 /*
         mDragHelper.settleCapturedViewAt()
 */
@@ -85,27 +94,25 @@ public class VDHLayout extends LinearLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
 
-        if (ev.getPointerCount() > 1 ) {
+        if (ev.getPointerCount() > 1) {
             mDragHelper.cancel();
             Log.e(TAG, "cancel");
             return false;
         }
         boolean flag = mDragHelper.shouldInterceptTouchEvent(ev);
-        Log.e(TAG,"onInterceptTouchEvent:"+flag);
+        Log.e(TAG, "onInterceptTouchEvent:" + flag);
         return flag;
     }
 
 
-
-
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        Log.e(TAG, "onTouchEvent:"+ev.getAction());
+        Log.e(TAG, "onTouchEvent:" + ev.getAction());
         mDragHelper.processTouchEvent(ev);
         return true;
     }
 
-     class DragHelperCallback extends ViewDragHelper.Callback {
+    class DragHelperCallback extends ViewDragHelper.Callback {
 
         @Override
         public boolean tryCaptureView(View child, int pointerId) {
@@ -121,26 +128,25 @@ public class VDHLayout extends LinearLayout {
             return newTop;
         }
 
-         @Override
-         public int clampViewPositionHorizontal(View child, int left, int dx) {
-             Log.d("DragLayout", "clampViewPositionHorizontal " + left + "," + dx);
-             final int leftBound = getPaddingLeft();
-             final int rightBound = getWidth() - child.getWidth();
-             final int newLeft = Math.min(Math.max(left, leftBound), rightBound);
-             return newLeft;
-         }
-         @Override
-         public int getViewHorizontalDragRange(View child)
-         {
-             return getMeasuredWidth()-child.getMeasuredWidth();
-         }
-         @Override
-         public int getViewVerticalDragRange(View child)
-         {
-             return getMeasuredHeight()-child.getMeasuredHeight();
-         }
-    }
+        @Override
+        public int clampViewPositionHorizontal(View child, int left, int dx) {
+            Log.d("DragLayout", "clampViewPositionHorizontal " + left + "," + dx);
+            final int leftBound = getPaddingLeft();
+            final int rightBound = getWidth() - child.getWidth();
+            final int newLeft = Math.min(Math.max(left, leftBound), rightBound);
+            return newLeft;
+        }
 
+        @Override
+        public int getViewHorizontalDragRange(View child) {
+            return getMeasuredWidth() - child.getMeasuredWidth();
+        }
+
+        @Override
+        public int getViewVerticalDragRange(View child) {
+            return getMeasuredHeight() - child.getMeasuredHeight();
+        }
+    }
 
 
 }

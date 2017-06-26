@@ -12,6 +12,16 @@ public class WishesData implements Serializable{
     public float x;
     public float y;
 
+    public float getScaleFactor() {
+        return scaleFactor;
+    }
+
+    public void setScaleFactor(float scaleFactor) {
+        this.scaleFactor = scaleFactor;
+    }
+
+    public float scaleFactor;
+
     public WishesData(){
     }
 

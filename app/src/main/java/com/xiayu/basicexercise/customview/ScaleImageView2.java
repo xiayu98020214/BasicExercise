@@ -11,12 +11,15 @@ import android.view.View;
  * Created by 七喜 on 2017/6/26.
  */
 
-public class ScaleImageView2 extends android.support.v7.widget.AppCompatImageView {
+public class ScaleImageView2 extends android.support.v7.widget.AppCompatImageButton {
 
     private static final String TAG = "ScaleImageView2";
     private ScaleGestureDetector mScaleGestureDetector;
 
     private View mView;
+
+    private float mLastFactor=1;
+
 
     public ScaleImageView2(Context context) {
         this(context, null);
@@ -48,13 +51,18 @@ public class ScaleImageView2 extends android.support.v7.widget.AppCompatImageVie
     private void init(Context context) {
         super.setScaleType(ScaleType.MATRIX);
         mView = this;
+       /* mView.setScaleX(mLastFactor);
+        mView.setScaleY(mLastFactor);*/
         mScaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureListener());
     }
 
+    public void setLastFactor(float lastFactor){
+        mLastFactor = lastFactor;
+
+    }
 
     class ScaleGestureListener implements ScaleGestureDetector.OnScaleGestureListener {
 
-        float mLastFactor=1;
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
             Log.e(TAG, "onScale");
