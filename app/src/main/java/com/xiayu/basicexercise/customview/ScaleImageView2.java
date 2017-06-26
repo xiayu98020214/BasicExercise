@@ -1,6 +1,8 @@
 package com.xiayu.basicexercise.customview;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -18,8 +20,10 @@ public class ScaleImageView2 extends android.support.v7.widget.AppCompatImageBut
 
     private View mView;
 
-    private float mLastFactor=1;
+    private float mLastFactor = 1;
+    private String textString = "nihaonihao";
 
+    private float textSize = 30;
 
     public ScaleImageView2(Context context) {
         this(context, null);
@@ -56,17 +60,35 @@ public class ScaleImageView2 extends android.support.v7.widget.AppCompatImageBut
         mScaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureListener());
     }
 
-    public void setLastFactor(float lastFactor){
+    public void setLastFactor(float lastFactor) {
         mLastFactor = lastFactor;
 
     }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        if (!textString.equals("")) {
+            Paint paint = new Paint();
+          /*  paint.setColor(0xff00);
+            paint.setStrokeWidth(3);
+            paint.setStyle(Paint.Style.FILL);*/
+            paint.setTextAlign(Paint.Align.CENTER);
+            paint.setTextSize(50);
+            canvas.drawText(textString, canvas.getWidth()/2, canvas.getHeight()/2, paint);
+        }
+
+
+    }
+
 
     class ScaleGestureListener implements ScaleGestureDetector.OnScaleGestureListener {
 
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
             Log.e(TAG, "onScale");
-            mLastFactor=mLastFactor*detector.getScaleFactor();
+            mLastFactor = mLastFactor * detector.getScaleFactor();
             mView.setScaleX(mLastFactor);
             mView.setScaleY(mLastFactor);
             //AnimatorUtils.scale(ScaleImageView2.this,detector.getScaleFactor(),detector.getScaleFactor());

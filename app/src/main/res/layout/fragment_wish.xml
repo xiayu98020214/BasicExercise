@@ -86,7 +86,7 @@
             android:id="@+id/firstwish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/reward_gived" />
+            android:background="@drawable/reward_gived" />
 
 
 

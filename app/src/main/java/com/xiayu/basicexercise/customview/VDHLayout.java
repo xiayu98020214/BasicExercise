@@ -18,7 +18,7 @@ import java.util.List;
 
 public class VDHLayout extends LinearLayout {
     private ViewDragHelper mDragHelper;
-    private View firstWish;
+    private ScaleImageView2 firstWish;
 
 
     private static final String TAG = "VDHLayout";
@@ -74,6 +74,7 @@ public class VDHLayout extends LinearLayout {
         if (data.get(0).getScaleFactor() > 0) {
             firstWish.setScaleY(data.get(0).getScaleFactor());
             firstWish.setScaleX(data.get(0).getScaleFactor());
+            firstWish.setLastFactor(data.get(0).getScaleFactor());
         }
 
 /*
@@ -85,7 +86,7 @@ public class VDHLayout extends LinearLayout {
 
     @Override
     protected void onFinishInflate() {
-        firstWish = (View) this.findViewById(R.id.firstwish);
+        firstWish = (ScaleImageView2) this.findViewById(R.id.firstwish);
         super.onFinishInflate();
 
     }
